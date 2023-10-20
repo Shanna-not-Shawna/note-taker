@@ -43,6 +43,31 @@ app.get('./api/notes', (req, res) => {
 
 // BONUS: add a delete route
 
+notes.get('/', (req, res) => {
+    readFromFile('./db/notes.json').then((data) => res.json(JSON.parse(data)));
+  });
+  
+  // POST Route for a new UX/UI tip
+  notes.post('/', (req, res) => {
+    console.log(req.body);
+  
+    const { title, note } = req.body;
+  
+    if (req.body) {
+      const newNote = {
+        note,
+        title,
+        note_id: uuidv4(),
+      };
+  
+      readAndAppend(newNote, './db/notes.json');
+      res.json(`Note added successfully`);
+    } else {
+      res.error('Error in adding note');
+    }
+  });
+
+
 // listen
 app.listen(port, () => {
     console.log('Server is running on http://localhost:${port}');
