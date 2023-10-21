@@ -9,6 +9,6 @@ html.get('/notes', (req, res) => {
 // get wildcard returns index.html
 html.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'public/index.html'))
-};
+});
 
 module.exports = html
