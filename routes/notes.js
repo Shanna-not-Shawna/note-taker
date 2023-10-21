@@ -31,11 +31,11 @@ notes.post('/', (req, res) => {
 
 notes.delete('/:id', (req, res) => {
     const notesID = req.params.id;
-    readFromFile('.db/db.json')
+    readFromFile('./db/db.json')
     .then((data) => JSON.parse(data))
     .then((json) => {
         const result = json.filter((note) => note.id !== notesID);
-        writeToFile('.db/db.json', result)
+        writeToFile('./db/db.json', result)
         res.json('${notesID} has been deleted')
     })
     .catch((err) => {
